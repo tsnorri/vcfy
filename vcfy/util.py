@@ -84,6 +84,8 @@ def make_template(ref, region, **params):
                             ',length=' + str(len(region.seq)) + '>')
     opts = ['vcfy']
     opts.append('-m ' + str(params['mrate']))
+    opts.append('-i ' + str(params['indrate']) if params['indrate'] else '')
+    opts.append('-e ' + str(params['extrate']) if params['extrate'] else '')
     opts.append("-r '" + region.id + "'")
     opts.append('-l ' + str(params['low']) if params['low'] else '')
     opts.append('-h ' + str(params['high']) if params['high'] else '')
