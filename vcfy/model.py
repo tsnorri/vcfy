@@ -53,11 +53,12 @@ def rnd_indel(locus, seq, insertion=False, length=1):
         A tuple indicating the REF and ALT alleles.
     """
     if insertion:
-        alt = ''.join(random.choice(util.BASES) for _ in range(length))
-        return util.VCF_MISSING_VALUE, [alt]
+        ref = seq[locus-1:locus].upper()
+        alt = ref + ''.join(random.choice(util.BASES) for _ in range(length))
+        return ref, [alt]
     else:
-        alt = seq[locus-1:locus-1+length].upper()
-        return alt, util.VCF_MISSING_VALUE
+        ref = seq[locus-1:locus-1+length].upper()
+        return ref, ["<DEL>"]
 
 
 def simulate(region, mrate, indrate, extrate, low=None, high=None):
